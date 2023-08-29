@@ -7,7 +7,6 @@ namespace App\Controller;
  * Edges Controller
  *
  * @property \App\Model\Table\EdgesTable $Edges
- * @method \App\Model\Entity\Edge[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class EdgesController extends AppController
 {
@@ -18,10 +17,9 @@ class EdgesController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Nodes', 'Graphs'],
-        ];
-        $edges = $this->paginate($this->Edges);
+        $query = $this->Edges->find()
+            ->contain(['Nodes', 'Graphs']);
+        $edges = $this->paginate($query);
 
         $this->set(compact('edges'));
     }
@@ -94,7 +92,7 @@ class EdgesController extends AppController
      * Delete method
      *
      * @param string|null $id Edge id.
-     * @return \Cake\Http\Response|null|void Redirects to index.
+     * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function delete($id = null)

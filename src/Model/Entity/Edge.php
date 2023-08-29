@@ -14,8 +14,8 @@ use Cake\ORM\Entity;
  * @property int $node_a_id
  * @property int $node_b_id
  * @property int $graph_id
- * @property \Cake\I18n\FrozenTime|null $created
- * @property \Cake\I18n\FrozenTime|null $modified
+ * @property \Cake\I18n\DateTime|null $created
+ * @property \Cake\I18n\DateTime|null $modified
  *
  * @property \App\Model\Entity\Node $node
  * @property \App\Model\Entity\Graph $graph
@@ -31,7 +31,7 @@ class Edge extends Entity
      *
      * @var array<string, bool>
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'name' => true,
         'metadata_id' => true,
         'node_a_id' => true,

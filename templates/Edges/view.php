@@ -14,7 +14,7 @@
             <?= $this->Html->link(__('New Edge'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
-    <div class="column-responsive column-80">
+    <div class="column column-80">
         <div class="edges view content">
             <h3><?= h($edge->name) ?></h3>
             <table>

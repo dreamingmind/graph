@@ -25,8 +25,8 @@ class EdgesFixture extends TestFixture
                 'node_a_id' => 1,
                 'node_b_id' => 1,
                 'graph_id' => 1,
-                'created' => '2023-08-29 02:54:18',
-                'modified' => '2023-08-29 02:54:18',
+                'created' => '2023-08-29 02:56:03',
+                'modified' => '2023-08-29 02:56:03',
             ],
         ];
         parent::init();
