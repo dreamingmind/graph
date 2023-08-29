@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 use App\Utilities\Phinx\PhinxHelperTrait;
-use Migrations\AbstractMigration;
+use Phinx\Migration\AbstractMigration;
 
 class LinkGraphToNode extends AbstractMigration
 {
