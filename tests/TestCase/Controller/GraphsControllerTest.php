@@ -21,8 +21,10 @@ class GraphsControllerTest extends TestCase
      *
      * @var array<string>
      */
-    protected $fixtures = [
+    protected array $fixtures = [
         'app.Graphs',
+        'app.Edges',
+        'app.Nodes',
     ];
 
     /**

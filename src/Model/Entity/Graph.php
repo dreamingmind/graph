@@ -11,8 +11,11 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string|null $name
  * @property int|null $metadata_id
- * @property \Cake\I18n\FrozenTime|null $created
- * @property \Cake\I18n\FrozenTime|null $modified
+ * @property \Cake\I18n\DateTime|null $created
+ * @property \Cake\I18n\DateTime|null $modified
+ *
+ * @property \App\Model\Entity\Edge[] $edges
+ * @property \App\Model\Entity\Node[] $nodes
  */
 class Graph extends Entity
 {
@@ -25,10 +28,12 @@ class Graph extends Entity
      *
      * @var array<string, bool>
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'name' => true,
         'metadata_id' => true,
         'created' => true,
         'modified' => true,
+        'edges' => true,
+        'nodes' => true,
     ];
 }

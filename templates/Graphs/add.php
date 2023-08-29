@@ -11,7 +11,7 @@
             <?= $this->Html->link(__('List Graphs'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
-    <div class="column-responsive column-80">
+    <div class="column column-80">
         <div class="graphs form content">
             <?= $this->Form->create($graph) ?>
             <fieldset>

@@ -23,8 +23,10 @@ class GraphsTableTest extends TestCase
      *
      * @var array<string>
      */
-    protected $fixtures = [
+    protected array $fixtures = [
         'app.Graphs',
+        'app.Edges',
+        'app.Nodes',
     ];
 
     /**
@@ -49,5 +51,16 @@ class GraphsTableTest extends TestCase
         unset($this->Graphs);
 
         parent::tearDown();
+    }
+
+    /**
+     * Test validationDefault method
+     *
+     * @return void
+     * @uses \App\Model\Table\GraphsTable::validationDefault()
+     */
+    public function testValidationDefault(): void
+    {
+        $this->markTestIncomplete('Not implemented yet.');
     }
 }

@@ -7,7 +7,6 @@ namespace App\Controller;
  * Graphs Controller
  *
  * @property \App\Model\Table\GraphsTable $Graphs
- * @method \App\Model\Entity\Graph[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class GraphsController extends AppController
 {
@@ -18,7 +17,8 @@ class GraphsController extends AppController
      */
     public function index()
     {
-        $graphs = $this->paginate($this->Graphs);
+        $query = $this->Graphs->find();
+        $graphs = $this->paginate($query);
 
         $this->set(compact('graphs'));
     }
@@ -33,7 +33,7 @@ class GraphsController extends AppController
     public function view($id = null)
     {
         $graph = $this->Graphs->get($id, [
-            'contain' => [],
+            'contain' => ['Edges', 'Nodes'],
         ]);
 
         $this->set(compact('graph'));
@@ -87,7 +87,7 @@ class GraphsController extends AppController
      * Delete method
      *
      * @param string|null $id Graph id.
-     * @return \Cake\Http\Response|null|void Redirects to index.
+     * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function delete($id = null)

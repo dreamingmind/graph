@@ -22,8 +22,8 @@ class GraphsFixture extends TestFixture
                 'id' => 1,
                 'name' => '',
                 'metadata_id' => 1,
-                'created' => '2023-08-29 02:32:55',
-                'modified' => '2023-08-29 02:32:55',
+                'created' => '2023-08-29 02:35:26',
+                'modified' => '2023-08-29 02:35:26',
             ],
         ];
         parent::init();

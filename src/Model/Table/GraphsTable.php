@@ -3,13 +3,16 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
-use Cake\ORM\Query;
+use Cake\ORM\Query\SelectQuery;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
  * Graphs Model
+ *
+ * @property \App\Model\Table\EdgesTable&\Cake\ORM\Association\HasMany $Edges
+ * @property \App\Model\Table\NodesTable&\Cake\ORM\Association\HasMany $Nodes
  *
  * @method \App\Model\Entity\Graph newEmptyEntity()
  * @method \App\Model\Entity\Graph newEntity(array $data, array $options = [])
