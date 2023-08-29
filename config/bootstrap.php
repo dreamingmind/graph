@@ -46,11 +46,6 @@ use Cake\Mailer\TransportFactory;
 use Cake\Routing\Router;
 use Cake\Utility\Security;
 
-/**
- * Load global functions.
- */
-require CAKE . 'functions.php';
-
 /*
  * See https://github.com/josegonzalez/php-dotenv for API details.
  *
@@ -109,7 +104,7 @@ if (Configure::read('debug')) {
 
 /*
  * Set the default server timezone. Using UTC makes time calculations / conversions easier.
- * Check https://php.net/manual/en/timezones.php for list of valid timezone strings.
+ * Check http://php.net/manual/en/timezones.php for list of valid timezone strings.
  */
 date_default_timezone_set(Configure::read('App.defaultTimezone'));
 
@@ -214,6 +209,9 @@ ServerRequest::addDetector('tablet', function ($request) {
 //    ->useLocaleParser();
 // \Cake\Database\TypeFactory::build('timestamptimezone')
 //    ->useLocaleParser();
+
+// There is no time-specific type in Cake
+TypeFactory::map('time', StringType::class);
 
 /*
  * Custom Inflector rules, can be set to correctly pluralize or singularize
