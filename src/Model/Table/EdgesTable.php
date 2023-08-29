@@ -12,7 +12,6 @@ use Cake\Validation\Validator;
  * Edges Model
  *
  * @property \App\Model\Table\NodesTable&\Cake\ORM\Association\BelongsTo $Nodes
- * @property \App\Model\Table\NodesTable&\Cake\ORM\Association\BelongsTo $Nodes
  * @property \App\Model\Table\GraphsTable&\Cake\ORM\Association\BelongsTo $Graphs
  *
  * @method \App\Model\Entity\Edge newEmptyEntity()
