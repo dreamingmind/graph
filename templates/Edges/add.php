@@ -21,7 +21,7 @@
                 <?php
                     echo $this->Form->control('name');
                     echo $this->Form->control('metadata_id');
-                    echo $this->Form->control('node_a_id');
+                    echo $this->Form->control('node_a_id', ['options' => $nodes]);
                     echo $this->Form->control('node_b_id', ['options' => $nodes]);
                     echo $this->Form->control('graph_id', ['options' => $graphs]);
                 ?>
