@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Utilities\Phinx;
 
@@ -8,14 +9,13 @@ use Phinx\Db\Table;
 
 trait PhinxHelperTrait
 {
-
     /**
      * Make 'created' and 'modified' for the table
      *
      * Does not update
      *
-     * @param Table $table
-     * @return Table
+     * @param \Phinx\Db\Table $table
+     * @return \Phinx\Db\Table
      */
     public function requiredCakeNormColumns(Table $table): Table
     {
@@ -30,6 +30,7 @@ trait PhinxHelperTrait
                 'datetime',
                 ['default' => null, 'null' => true,]
             );
+
             return $table;
     }
 
@@ -38,13 +39,18 @@ trait PhinxHelperTrait
      *
      * Does not update
      *
-     * @param Table $table
-     * @param string $foreign_table_name
-     * @param ?string $after
-     * @return Table $table
+     * @param \Phinx\Db\Table $table the table to modify
+     * @param string $foreign_table_name name of the table to link
+     * @param ?string $after insert the new foreign key after this column
+     * @param ?string $columnName override the default 'tablename_id' if desired
+     * @return \Phinx\Db\Table $table
      */
-    public function requiredForeignKey(Table $table, string $foreign_table_name, string $after = null): Table
-    {
+    public function requiredForeignKey(
+        Table $table,
+        string $foreign_table_name,
+        ?string $after = null,
+        ?string $columnName = null
+    ): Table {
         $options = [
             'limit' => MysqlAdapter::INT_REGULAR,
             'null' => false,
@@ -53,7 +59,7 @@ trait PhinxHelperTrait
         if (!is_null($after)) {
             $options['after'] = $after;
         }
-        $columnName = Inflector::singularize($foreign_table_name) . "_id";
+        $columnName = $columnName ?? Inflector::singularize($foreign_table_name) . '_id';
 
         $table
             ->addColumn($columnName, 'integer', $options)
@@ -61,7 +67,8 @@ trait PhinxHelperTrait
                 $columnName,
                 $foreign_table_name,
                 'id',
-                ['delete' => 'CASCADE',]);
+                ['delete' => 'CASCADE',]
+            );
 
         return $table;
     }
@@ -71,12 +78,13 @@ trait PhinxHelperTrait
      *
      * Does not update
      *
-     * @param Table $table
-     * @param string $foreign_table_name
-     * @param string|null $after
-     * @return Table
+     * @param \Phinx\Db\Table $table the table to modify
+     * @param string $foreign_table_name name of the table to link
+     * @param ?string $after insert the new foreign key after this column
+     * @param ?string $columnName override the default 'tablename_id' if desired
+     * @return \Phinx\Db\Table $table
      */
-    public function optionalForeignKey(Table $table, string $foreign_table_name, string $after = null):Table
+    public function optionalForeignKey(Table $table, string $foreign_table_name, ?string $after = null): Table
     {
         $options = [
             'limit' => MysqlAdapter::INT_REGULAR,
@@ -87,24 +95,17 @@ trait PhinxHelperTrait
         if (!is_null($after)) {
             $options['after'] = $after;
         }
-        $columnName = Inflector::singularize($foreign_table_name) . "_id";
-        echo($columnName . "\n");
-        echo($foreign_table_name . "\n");
-        echo(get_class($table) . "\n");
-//        die;
+        $columnName = $columnName ?? Inflector::singularize($foreign_table_name) . '_id';
+
         $table
             ->addColumn($columnName, 'integer', $options)
             ->addForeignKey(
                 $columnName,
                 $foreign_table_name,
                 'id',
-                ['delete'=> 'SET_NULL', 'update'=> 'NO_ACTION']);
-//        $refTable = $this->table('tag_relationships');
-//        $refTable->addColumn('tag_id', 'integer', ['null' => true])
-//            ->addForeignKey('tag_id', 'tags', 'id', ['delete'=> 'SET_NULL', 'update'=> 'NO_ACTION'])
-//            ->save();
+                ['delete' => 'SET_NULL', 'update' => 'NO_ACTION']
+            );
 
         return $table;
     }
-
 }
