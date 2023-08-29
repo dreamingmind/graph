@@ -13,21 +13,19 @@ use Cake\Validation\Validator;
  * Nodes Model
  *
  * @property \App\Model\Table\GraphsTable&\Cake\ORM\Association\BelongsTo $Graphs
- *
- * @method Node newEmptyEntity()
- * @method Node newEntity(array $data, array $options = [])
- * @method Node[] newEntities(array $data, array $options = [])
- * @method Node get($primaryKey, $options = [])
- * @method Node findOrCreate($search, ?callable $callback = null, $options = [])
- * @method Node patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method Node[] patchEntities(iterable $entities, array $data, array $options = [])
- * @method Node|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method Node saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method Node[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
- * @method Node[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
- * @method Node[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
- * @method Node[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
- *
+ * @method \App\Model\Entity\Node newEmptyEntity()
+ * @method \App\Model\Entity\Node newEntity(array $data, array $options = [])
+ * @method \App\Model\Entity\Node[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Node get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Node findOrCreate($search, ?callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Node patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Node[] patchEntities(iterable $entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Node|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Node saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Node[]|\Cake\Datasource\ResultSetInterface|false saveMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Node[]|\Cake\Datasource\ResultSetInterface saveManyOrFail(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Node[]|\Cake\Datasource\ResultSetInterface|false deleteMany(iterable $entities, $options = [])
+ * @method \App\Model\Entity\Node[]|\Cake\Datasource\ResultSetInterface deleteManyOrFail(iterable $entities, $options = [])
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class NodesTable extends Table
