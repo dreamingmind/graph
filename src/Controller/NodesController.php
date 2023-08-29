@@ -7,7 +7,6 @@ namespace App\Controller;
  * Nodes Controller
  *
  * @property \App\Model\Table\NodesTable $Nodes
- * @method \App\Model\Entity\Node[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class NodesController extends AppController
 {
@@ -18,10 +17,9 @@ class NodesController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Graphs'],
-        ];
-        $nodes = $this->paginate($this->Nodes);
+        $query = $this->Nodes->find()
+            ->contain(['Graphs']);
+        $nodes = $this->paginate($query);
 
         $this->set(compact('nodes'));
     }
@@ -92,7 +90,7 @@ class NodesController extends AppController
      * Delete method
      *
      * @param string|null $id Node id.
-     * @return \Cake\Http\Response|null|void Redirects to index.
+     * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function delete($id = null)

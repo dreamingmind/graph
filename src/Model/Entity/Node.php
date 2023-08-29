@@ -12,8 +12,8 @@ use Cake\ORM\Entity;
  * @property string|null $name
  * @property int|null $metadata_id
  * @property int $graph_id
- * @property \Cake\I18n\FrozenTime|null $created
- * @property \Cake\I18n\FrozenTime|null $modified
+ * @property \Cake\I18n\DateTime|null $created
+ * @property \Cake\I18n\DateTime|null $modified
  *
  * @property \App\Model\Entity\Graph $graph
  */
@@ -28,7 +28,7 @@ class Node extends Entity
      *
      * @var array<string, bool>
      */
-    protected $_accessible = [
+    protected array $_accessible = [
         'name' => true,
         'metadata_id' => true,
         'graph_id' => true,

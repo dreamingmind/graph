@@ -23,8 +23,8 @@ class NodesFixture extends TestFixture
                 'name' => '',
                 'metadata_id' => 1,
                 'graph_id' => 1,
-                'created' => '2023-08-29 02:44:13',
-                'modified' => '2023-08-29 02:44:13',
+                'created' => '2023-08-29 02:50:43',
+                'modified' => '2023-08-29 02:50:43',
             ],
         ];
         parent::init();
