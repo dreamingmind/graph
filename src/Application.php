@@ -61,7 +61,7 @@ class Application extends BaseApplication
          */
         if (Configure::read('debug')) {
             $this->addPlugin('DebugKit');
-            $this->addPlugin('CakephpFixtureFactories');
+//            $this->addPlugin('CakephpFixtureFactories');
         }
 
         // Load more plugins here
@@ -133,5 +133,6 @@ class Application extends BaseApplication
         $this->addPlugin('Migrations');
 
         // Load more plugins here
+        $this->addPlugin('CakephpFixtureFactories');
     }
 }
