@@ -20,8 +20,15 @@ class GraphsFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'name' => '',
-                'metadata_id' => 1,
+                'name' => 'main',
+                'metadata_id' => null,
+                'created' => '2023-08-29 02:32:55',
+                'modified' => '2023-08-29 02:32:55',
+            ],
+            [
+                'id' => 2,
+                'name' => 'additional',
+                'metadata_id' => null,
                 'created' => '2023-08-29 02:32:55',
                 'modified' => '2023-08-29 02:32:55',
             ],
