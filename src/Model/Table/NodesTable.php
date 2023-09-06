@@ -5,6 +5,7 @@ namespace App\Model\Table;
 
 use App\Model\Entity\Node;
 use Cake\Datasource\EntityInterface;
+use Cake\ORM\Locator\LocatorAwareTrait;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
@@ -30,6 +31,8 @@ use Cake\Validation\Validator;
  */
 class NodesTable extends Table
 {
+    use LocatorAwareTrait;
+
     /**
      * Initialize method
      *
@@ -50,6 +53,8 @@ class NodesTable extends Table
             'foreignKey' => 'graph_id',
             'joinType' => 'INNER',
         ]);
+
+        $this->hasMany('Edges');
     }
 
     /**
@@ -116,8 +121,17 @@ class NodesTable extends Table
         Node $origin,
         Node $destination,
         ?EntityInterface $edge_metadata = null
-    ): bool {
-        return true;
+    ): EntityInterface|bool {
+        $Edges = $this->fetchTable('Edges');
+
+        $entity = $Edges->newEntity([
+            'node_a_id' => $origin->id,
+            'node_b_id' => $destination->id,
+            'name' => 'link',
+            'graph_id' => $origin->graph_id,
+        ]);
+
+        return $Edges->save($entity);
     }
 
     /**
