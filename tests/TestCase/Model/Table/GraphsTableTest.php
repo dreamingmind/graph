@@ -4,13 +4,17 @@ declare(strict_types=1);
 namespace App\Test\TestCase\Model\Table;
 
 use App\Model\Table\GraphsTable;
+use App\Test\Factory\GraphFactory;
 use Cake\TestSuite\TestCase;
+use CakephpTestSuiteLight\Fixture\TruncateDirtyTables;
 
 /**
  * App\Model\Table\GraphsTable Test Case
  */
 class GraphsTableTest extends TestCase
 {
+    use TruncateDirtyTables;
+
     /**
      * Test subject
      *
@@ -24,7 +28,7 @@ class GraphsTableTest extends TestCase
      * @var array<string>
      */
     protected $fixtures = [
-        'app.Graphs',
+//        'app.Graphs',
     ];
 
     /**
@@ -50,4 +54,15 @@ class GraphsTableTest extends TestCase
 
         parent::tearDown();
     }
+
+    public function testFind()
+    {
+        $g = GraphFactory::make()->persist();
+        debug($g);
+//        $vals = $this->Graphs
+//            ->find()
+//            ->all();
+//        debug($vals);
+    }
+
 }
