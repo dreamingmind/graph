@@ -1,18 +1,22 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Utilities;
 
+use Cake\ORM\Locator\LocatorAwareTrait;
+
 class Graph
 {
+    use LocatorAwareTrait;
 
     private string $_graph_id;
     private bool $_is_directed;
     /**
-     * @var Node[]
+     * @var \App\Utilities\Node[]
      */
     private array $_nodes = [];
     /**
-     * @var Edge[]
+     * @var \App\Utilities\Edge[]
      */
     private array $_edges = [];
     private ?array $_adjacency_list = null;
@@ -24,20 +28,16 @@ class Graph
      *      'adjacencyList' array
      *      'nodes' NodesInterface[]
      *      'edge' EdgeInterface[]
+     *
      * @param ...$args
      */
     public function __construct(...$args)
     {
-        $this->_graph_id = $args['graphId'] ?? uniqid('graph_');
+        $this->graph = $args['graph'];
+        $this->_graph_id = $args['graphId'];
+    }
 
-        $this->_adjacency_list = $args['adjacencyList'] ?? [];
-
-        if ($args['nodes'] && is_array($args['nodes'])) {
-            $this->_nodes = $args['nodes'];
-        }
-
-        if ($args['edges'] && is_array($args['edges'])) {
-            $this->_edges = $args['edges'];
-        }
+    public function displace(Node $old_node, Node $new_node): void
+    {
     }
 }
