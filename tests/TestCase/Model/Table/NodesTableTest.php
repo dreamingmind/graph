@@ -78,8 +78,10 @@ class NodesTableTest extends TestCase
         $a = $fa->nodes[0];
         $b = $fb->nodes[0];
 
-        $this->expectException('UnrelatedNodesException');
+        $actual = $this->Nodes->join($a, $b);
+        $errors = $actual->getErrors();
 
-        $this->Nodes->join($a, $b);
+        $this->assertArrayHasKey('node_b_id', $errors);
+        $this->assertArrayHasKey('nodesInSameGraph', $errors['node_b_id']);
     }
 }
