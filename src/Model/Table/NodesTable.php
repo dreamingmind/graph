@@ -131,7 +131,9 @@ class NodesTable extends Table
             'graph_id' => $origin->graph_id,
         ]);
 
-        return $Edges->save($entity);
+        $Edges->save($entity);
+
+        return $entity;
     }
 
     /**
