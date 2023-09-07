@@ -69,13 +69,17 @@ class NodesTableTest extends TestCase
         $this->assertInstanceOf(EntityInterface::class, $actual);
     }
 
-    public function test_join_mixingGraphs(): void
+    public function test_join_nodeAcrossGraphs(): void
     {
-        $g = GraphFactory::make(3)->persist();
-        $a = $this->Nodes->get(1);
-        $b = $this->Nodes->get(4);
-        $actual = $this->Nodes->join($a, $b);
-        debug($g);
-        $this->assertFalse($actual);
+        $fa = GraphFactory::make()
+            ->with('Nodes')->persist();
+        $fb = GraphFactory::make()
+            ->with('Nodes')->persist();
+        $a = $fa->nodes[0];
+        $b = $fb->nodes[0];
+
+        $this->expectException('UnrelatedNodesException');
+
+        $this->Nodes->join($a, $b);
     }
 }
