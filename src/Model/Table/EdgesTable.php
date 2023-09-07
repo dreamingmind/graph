@@ -11,7 +11,8 @@ use Cake\Validation\Validator;
 /**
  * Edges Model
  *
- * @property \App\Model\Table\NodesTable&\Cake\ORM\Association\BelongsTo $Nodes
+ * @property \App\Model\Table\NodesTable&\Cake\ORM\Association\BelongsTo $NodeA
+ * @property \App\Model\Table\NodesTable&\Cake\ORM\Association\BelongsTo $NodeB
  * @property \App\Model\Table\GraphsTable&\Cake\ORM\Association\BelongsTo $Graphs
  *
  * @method \App\Model\Entity\Edge newEmptyEntity()
@@ -48,14 +49,16 @@ class EdgesTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('Nodes', [
-            'foreignKey' => 'node_a_id',
-            'joinType' => 'INNER',
-        ]);
-        $this->belongsTo('Nodes', [
+        $this->belongsTo('NodeA', [
+            'className' => 'Nodes',
             'foreignKey' => 'node_b_id',
-            'joinType' => 'INNER',
         ]);
+
+        $this->belongsTo('NodeB', [
+            'className' => 'Nodes',
+            'foreignKey' => 'node_b_id',
+        ]);
+
         $this->belongsTo('Graphs', [
             'foreignKey' => 'graph_id',
             'joinType' => 'INNER',
