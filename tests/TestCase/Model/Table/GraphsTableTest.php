@@ -54,15 +54,4 @@ class GraphsTableTest extends TestCase
 
         parent::tearDown();
     }
-
-    public function testFind()
-    {
-        $g = GraphFactory::make()->persist();
-        debug($g);
-//        $vals = $this->Graphs
-//            ->find()
-//            ->all();
-//        debug($vals);
-    }
-
 }
