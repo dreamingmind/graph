@@ -6,6 +6,7 @@ namespace App\Test\TestCase\Model\Table;
 use App\Model\Table\NodesTable;
 use App\Test\Factory\GraphFactory;
 use Cake\Datasource\EntityInterface;
+use Cake\ORM\RulesChecker;
 use Cake\TestSuite\TestCase;
 use CakephpTestSuiteLight\Fixture\TruncateDirtyTables;
 
@@ -57,34 +58,14 @@ class NodesTableTest extends TestCase
         parent::tearDown();
     }
 
-    /**
-     * Test validationDefault method
-     *
-     * @return void
-     * @uses \App\Model\Table\NodesTable::validationDefault()
-     */
-    public function testValidationDefault(): void
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test buildRules method
-     *
-     * @return void
-     * @uses \App\Model\Table\NodesTable::buildRules()
-     */
-    public function testBuildRules(): void
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
 
     public function test_join(): void
     {
         $a = $this->Nodes->get(1);
         $b = $this->Nodes->get(2);
+
         $actual = $this->Nodes->join($a, $b);
-        debug($actual);
+
         $this->assertInstanceOf(EntityInterface::class, $actual);
     }
 
