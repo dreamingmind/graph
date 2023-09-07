@@ -106,9 +106,19 @@ class EdgesTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->existsIn('node_a_id', 'Nodes'), ['errorField' => 'node_a_id']);
-        $rules->add($rules->existsIn('node_b_id', 'Nodes'), ['errorField' => 'node_b_id']);
+        $rules->add($rules->existsIn('node_a_id', 'NodeA'), ['errorField' => 'node_a_id']);
+        $rules->add($rules->existsIn('node_b_id', 'NodeB'), ['errorField' => 'node_b_id']);
         $rules->add($rules->existsIn('graph_id', 'Graphs'), ['errorField' => 'graph_id']);
+
+        $rules->add(
+            function ($entity, $options) {
+                return $this->NodeA->get($entity->node_a_id)->graph_id
+                    ===
+                    $this->NodeB->get($entity->node_b_id)->graph_id;
+            },
+            'nodesInSameGraph',
+            ['message' => 'Nodes must be from the same graph', 'errorField' => 'node_b_id']
+        );
 
         return $rules;
     }
