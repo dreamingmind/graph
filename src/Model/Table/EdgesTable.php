@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
+use App\Constants\EntityError;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -33,6 +34,7 @@ use Cake\Validation\Validator;
  */
 class EdgesTable extends Table
 {
+
     /**
      * Initialize method
      *
@@ -116,7 +118,7 @@ class EdgesTable extends Table
                     ===
                     $this->NodeB->get($entity->node_b_id)->graph_id;
             },
-            'nodesInSameGraph',
+            EntityError::NOT_SAME_GRAPH,
             ['message' => 'Nodes must be from the same graph', 'errorField' => 'node_b_id']
         );
 

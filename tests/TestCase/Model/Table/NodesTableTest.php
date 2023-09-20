@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Model\Table;
 
+use App\Constants\EntityError;
 use App\Model\Table\NodesTable;
 use App\Test\Factory\GraphFactory;
 use Cake\Datasource\EntityInterface;
@@ -82,6 +83,7 @@ class NodesTableTest extends TestCase
         $errors = $actual->getErrors();
 
         $this->assertArrayHasKey('node_b_id', $errors);
-        $this->assertArrayHasKey('nodesInSameGraph', $errors['node_b_id']);
+        $this->assertArrayHasKey(EntityError::NOT_SAME_GRAPH, $errors['node_b_id']);
+    }
     }
 }
