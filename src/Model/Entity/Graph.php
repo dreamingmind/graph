@@ -11,6 +11,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string|null $name
  * @property int|null $metadata_id
+ * @property \App\Model\Entity\Node[]|null $nodes
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $modified
  */
@@ -28,6 +29,7 @@ class Graph extends Entity
     protected $_accessible = [
         'name' => true,
         'metadata_id' => true,
+        'nodes' => true,
         'created' => true,
         'modified' => true,
     ];
