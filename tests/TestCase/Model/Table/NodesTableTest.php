@@ -87,5 +87,26 @@ class NodesTableTest extends TestCase
         $this->assertArrayHasKey('node_b_id', $errors);
         $this->assertArrayHasKey(EntityError::NOT_SAME_GRAPH, $errors['node_b_id']);
     }
+
+    public function test_joinMany_manyToMany_noEdgeMetadata()
+    {
+        $graph = $this->fetchTable('Graphs')
+            ->find()
+            ->contain('Nodes')
+            ->first();
+
+        $node_chunks = array_chunk($graph->nodes, 2);
+
+        $starts = $node_chunks[0];
+        $targets = $node_chunks[1];
+
+        $actual = $this->Nodes->joinMany($starts, $targets);
+
+        $this->assertCount(2, $starts);
+        $this->assertCount(2, $targets);
+
+        // 4 edges + 'errors' node
+        $this->assertCount(5, $actual);
+
     }
 }

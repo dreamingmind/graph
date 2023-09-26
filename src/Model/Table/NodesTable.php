@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
+use App\Model\Entity\Edge;
 use App\Model\Entity\Node;
 use Cake\Datasource\EntityInterface;
 use Cake\ORM\Locator\LocatorAwareTrait;
@@ -114,15 +115,16 @@ class NodesTable extends Table
      *
      * @param \App\Model\Entity\Node $origin an existing node
      * @param \App\Model\Entity\Node $destination the node to connect to origin
-     * @param \Cake\Datasource\EntityInterface|null $edge_metadata data to explain the edge
-     * @return bool
+     * @param ?object $edge_metadata data to explain the edge
+     * @return \App\Model\Entity\Edge
      */
     public function join(
         Node $origin,
         Node $destination,
-        ?EntityInterface $edge_metadata = null
-    ): EntityInterface|bool {
+        ?object $edge_metadata = null
+    ): Edge {
         $Edges = $this->fetchTable('Edges');
+        /** @var \App\Model\Table\EdgesTable $Edges */
 
         $entity = $Edges->newEntity([
             'node_a_id' => $origin->id,
@@ -134,6 +136,43 @@ class NodesTable extends Table
         $Edges->save($entity);
 
         return $entity;
+    }
+
+    /**
+     * Every $origin will be linked to every $target
+     *
+     * If a single $edge_metadata entity is provided
+     *      it will be used for every edge
+     * If the array 'origin_edges' is provided
+     *      oEdges[0] will be used as edge_metadata for all $origins[0] edges,
+     *      oEdges[1] will be used as edge_metadata for all $origins[1] edges,
+     *      etc.
+     * If the array 'target_edges' is provided
+     *      tEdges[0] will be used as edge_metadata for all $targets[0] edges,
+     *      tEdges[1] will be used as edge_metadata for all $targets[1] edges,
+     *      etc.
+     *
+     * @param array $origins
+     * @param array $targets
+     * @param array|null $oEdges
+     * @param array|null $tEdges
+     * @return array
+     */
+    public function joinMany(array $origins, array $targets, array $oEdges = null, array $tEdges = null): array
+    {
+        $edges = ['errors' => []];
+        foreach ($origins as $o_index => $o_node) {
+            foreach ($targets as $t_index => $t_node) {
+                $edge = $this->join($o_node, $t_node);
+                if ($edge->hasErrors()) {
+                    $edges['errors']["$o_index-$t_index"] = $edge;
+                }
+                else {
+                    $edges["$o_index-$t_index"] = $edge;
+                }
+            }
+        }
+        return $edges;
     }
 
     /**
