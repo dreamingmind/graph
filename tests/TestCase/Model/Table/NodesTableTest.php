@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Test\TestCase\Model\Table;
 
 use App\Constants\EntityError;
+use App\Model\Entity\Edge;
 use App\Model\Table\NodesTable;
 use App\Test\Factory\GraphFactory;
 use Cake\Datasource\EntityInterface;
@@ -59,7 +60,6 @@ class NodesTableTest extends TestCase
         parent::tearDown();
     }
 
-
     public function test_join(): void
     {
         $a = $this->Nodes->get(1);
@@ -67,7 +67,8 @@ class NodesTableTest extends TestCase
 
         $actual = $this->Nodes->join($a, $b);
 
-        $this->assertInstanceOf(EntityInterface::class, $actual);
+        $this->assertInstanceOf(Edge::class, $actual);
+        $this->assertCount(0, $actual->getErrors());
     }
 
     public function test_join_nodeAcrossGraphs(): void
