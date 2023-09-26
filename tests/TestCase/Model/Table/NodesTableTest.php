@@ -72,12 +72,13 @@ class NodesTableTest extends TestCase
 
     public function test_join_nodeAcrossGraphs(): void
     {
-        $fa = GraphFactory::make()
-            ->with('Nodes')->persist();
-        $fb = GraphFactory::make()
-            ->with('Nodes')->persist();
-        $a = $fa->nodes[0];
-        $b = $fb->nodes[0];
+        $graph = $this->fetchTable('Graphs')
+            ->find()
+            ->contain('Nodes')
+            ->limit(2)
+            ->toArray();
+        $a = $graph[0]->nodes[0];
+        $b = $graph[1]->nodes[0];
 
         $actual = $this->Nodes->join($a, $b);
         $errors = $actual->getErrors();
