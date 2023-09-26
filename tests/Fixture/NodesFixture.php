@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Test\Fixture;
 
+use Cake\ORM\Locator\LocatorAwareTrait;
 use Cake\TestSuite\Fixture\TestFixture;
 
 /**
@@ -10,6 +11,8 @@ use Cake\TestSuite\Fixture\TestFixture;
  */
 class NodesFixture extends TestFixture
 {
+    use LocatorAwareTrait;
+
     /**
      * Init method
      *
@@ -43,6 +46,14 @@ class NodesFixture extends TestFixture
                 'modified' => '2023-08-29 02:44:13',
             ],
             [
+                'id' => 5,
+                'name' => 'five',
+                'metadata_id' => null,
+                'graph_id' => 1,
+                'created' => '2023-08-29 02:44:13',
+                'modified' => '2023-08-29 02:44:13',
+            ],
+            [
                 'id' => 4,
                 'name' => 'other one',
                 'metadata_id' => null,
@@ -53,4 +64,5 @@ class NodesFixture extends TestFixture
         ];
         parent::init();
     }
+
 }
